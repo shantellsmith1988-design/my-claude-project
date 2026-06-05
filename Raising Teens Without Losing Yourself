@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raising Teens Without Losing Yourself</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --cream:#F5F0E8;--beige:#EDE5D8;--warm-white:#FAF7F2;
+    --green-deep:#3D5A47;--green-mid:#5C7A65;
+    --brown-dark:#5C4A32;--brown-mid:#8B6F4E;--brown-light:#C4A882;
+    --gold-muted:#A8904A;--gold-light:#D4B86A;
+    --text-dark:#2C2218;--text-mid:#6B5544;--text-light:#9B856E;
+  }
+  html,body{min-height:100vh;background:#2C2218;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 16px;font-family:'Lato',sans-serif;gap:22px}
+
+  .section-tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+  .tab-btn{font-family:'Lato',sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:6px 14px;border-radius:20px;border:1px solid rgba(250,247,242,.2);background:transparent;color:rgba(250,247,242,.45);cursor:pointer;transition:all .2s}
+  .tab-btn:hover{background:rgba(250,247,242,.08);color:rgba(250,247,242,.8)}
+  .tab-btn.active{background:rgba(250,247,242,.12);color:rgba(250,247,242,.9);border-color:rgba(250,247,242,.4)}
+
+  .slide{width:340px;height:600px;position:relative;overflow:hidden;border-radius:16px;display:none;flex-direction:column;justify-content:center;align-items:center;padding:48px 36px;text-align:center;box-shadow:0 32px 80px rgba(0,0,0,0.4)}
+  .slide.active{display:flex}
+  .slide-number-badge{position:absolute;top:20px;right:20px;font-family:'Lato',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.45}
+  .section-label{font-family:'Lato',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:28px;opacity:.55}
+  .divider{width:40px;height:1px;margin:20px auto;opacity:.4}
+  .divider-sm{width:24px;height:1px;margin:16px auto;opacity:.3}
+  .slide-headline{font-family:'Playfair Display',serif;font-weight:400;line-height:1.25}
+  .slide-subhead{font-family:'Playfair Display',serif;font-style:italic;font-weight:400;line-height:1.35}
+  .slide-body{font-family:'Lato',sans-serif;font-weight:300;line-height:1.7}
+  .slide-emphasis{font-family:'Lato',sans-serif;font-weight:700;letter-spacing:1px}
+  .slide-quote{font-family:'Playfair Display',serif;font-style:italic;font-weight:400;line-height:1.5}
+  .dot-accent{width:6px;height:6px;border-radius:50%;margin:0 auto 20px}
+
+  .theme-cover{background:var(--green-deep)}
+  .theme-cover .section-label{color:#8FA898}.theme-cover .slide-headline{color:var(--warm-white);font-size:32px}.theme-cover .slide-subhead{color:var(--gold-light);font-size:18px;margin-top:12px}.theme-cover .divider{background:var(--gold-muted)}.theme-cover .slide-body{color:rgba(250,247,242,.7);font-size:14px;margin-top:16px}.theme-cover .slide-number-badge{color:var(--warm-white)}.theme-cover .dot-accent{background:var(--gold-light)}
+
+  .theme-cream{background:var(--cream)}
+  .theme-cream .section-label{color:var(--brown-mid)}.theme-cream .slide-headline{color:var(--text-dark);font-size:26px}.theme-cream .slide-subhead{color:var(--brown-mid);font-size:16px;margin-top:10px}.theme-cream .slide-body{color:var(--text-mid);font-size:14px;margin-top:14px}.theme-cream .slide-quote{color:var(--text-dark);font-size:20px}.theme-cream .slide-emphasis{color:var(--green-deep);font-size:11px;margin-top:20px}.theme-cream .divider{background:var(--brown-light)}.theme-cream .divider-sm{background:var(--brown-light)}.theme-cream .slide-number-badge{color:var(--text-mid)}.theme-cream .dot-accent{background:var(--gold-muted)}
+
+  .theme-beige{background:var(--beige)}
+  .theme-beige .section-label{color:var(--brown-mid)}.theme-beige .slide-headline{color:var(--text-dark);font-size:26px}.theme-beige .slide-subhead{color:var(--brown-mid);font-size:16px;margin-top:10px}.theme-beige .slide-body{color:var(--text-mid);font-size:14px;margin-top:14px}.theme-beige .slide-quote{color:var(--text-dark);font-size:19px}.theme-beige .slide-emphasis{color:var(--green-deep);font-size:11px;margin-top:20px}.theme-beige .divider{background:var(--brown-light)}.theme-beige .divider-sm{background:var(--brown-light)}.theme-beige .slide-number-badge{color:var(--text-mid)}.theme-beige .dot-accent{background:#5C7A65}
+
+  .theme-green{background:var(--green-mid)}
+  .theme-green .section-label{color:rgba(250,247,242,.55)}.theme-green .slide-headline{color:var(--warm-white);font-size:27px}.theme-green .slide-subhead{color:var(--gold-light);font-size:17px;margin-top:10px}.theme-green .slide-body{color:rgba(250,247,242,.75);font-size:14px;margin-top:14px}.theme-green .slide-emphasis{color:var(--gold-light);font-size:11px;letter-spacing:2px;margin-top:20px}.theme-green .divider{background:var(--gold-light)}.theme-green .slide-number-badge{color:rgba(250,247,242,.5)}.theme-green .dot-accent{background:var(--gold-light)}
+
+  .theme-dark-warm{background:var(--brown-dark)}
+  .theme-dark-warm .section-label{color:var(--brown-light)}.theme-dark-warm .slide-headline{color:var(--warm-white);font-size:28px}.theme-dark-warm .slide-subhead{color:var(--gold-light);font-size:17px;margin-top:10px}.theme-dark-warm .slide-body{color:rgba(250,247,242,.7);font-size:14px;margin-top:14px}.theme-dark-warm .slide-emphasis{color:var(--gold-light);font-size:11px;letter-spacing:2px;margin-top:20px}.theme-dark-warm .divider{background:var(--gold-muted)}.theme-dark-warm .slide-number-badge{color:rgba(250,247,242,.4)}.theme-dark-warm .dot-accent{background:var(--gold-light)}
+
+  .controls{display:flex;align-items:center;gap:20px}
+  .btn-nav{width:44px;height:44px;border-radius:50%;border:1px solid rgba(250,247,242,.2);background:rgba(250,247,242,.08);color:var(--warm-white);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;line-height:1}
+  .btn-nav:hover{background:rgba(250,247,242,.16)}.btn-nav:disabled{opacity:.25;cursor:not-allowed}
+  .slide-counter{font-family:'Lato',sans-serif;font-size:12px;color:rgba(250,247,242,.5);letter-spacing:1px;min-width:60px;text-align:center}
+  .progress-bar{width:340px;height:2px;background:rgba(250,247,242,.12);border-radius:2px;overflow:hidden}
+  .progress-fill{height:100%;background:var(--gold-muted);border-radius:2px;transition:width .3s ease}
+
+  .keyboard-hint{font-family:'Lato',sans-serif;font-size:10px;color:rgba(250,247,242,.25);letter-spacing:1px}
+</style>
+</head>
+<body>
+
+<div class="section-tabs">
+  <button class="tab-btn active" onclick="goToSlide(0)">§1 Pulling Away</button>
+  <button class="tab-btn" onclick="goToSlide(7)">§2 Control</button>
+  <button class="tab-btn" onclick="goToSlide(13)">§3 Helping</button>
+  <button class="tab-btn" onclick="goToSlide(19)">§4 Losing Yourself</button>
+</div>
+
+<!-- S1 -->
+<div class="slide theme-cover active"><span class="slide-number-badge">01 / 25</span><div class="section-label">Section One</div><div class="dot-accent"></div><div class="slide-headline">Your teen isn't broken.</div><div class="divider"></div><div class="slide-subhead">And neither are you.</div><div class="slide-body">But something between you has quietly shifted — and you can feel it.</div></div>
+<!-- S2 -->
+<div class="slide theme-cream"><span class="slide-number-badge">02 / 25</span><div class="section-label">Why Your Teen is Pulling Away</div><div class="slide-quote">"They used to tell me everything."</div><div class="divider-sm"></div><div class="slide-body">The silence isn't rejection. It's development. Your teen is learning to exist as a separate person — and that process looks a lot like distance.</div><div class="slide-emphasis">THIS IS SUPPOSED TO HAPPEN.</div></div>
+<!-- S3 -->
+<div class="slide theme-beige"><span class="slide-number-badge">03 / 25</span><div class="section-label">Why Your Teen is Pulling Away</div><div class="slide-headline">They are becoming<br>someone new.</div><div class="divider-sm"></div><div class="slide-body">Their brain is literally rewiring. They're asking: who am I when no one is watching?<br><br>That question needs room — not answers from you.</div></div>
+<!-- S4 -->
+<div class="slide theme-cream"><span class="slide-number-badge">04 / 25</span><div class="section-label">Why Your Teen is Pulling Away</div><div class="dot-accent"></div><div class="slide-quote">"The more I reach, the further they go."</div><div class="divider-sm"></div><div class="slide-body">Over-presence signals distrust. Even when it comes from love, constant checking-in teaches them: you don't believe they can handle it.</div><div class="slide-emphasis">LOVE CAN LOOK LIKE LETTING GO.</div></div>
+<!-- S5 -->
+<div class="slide theme-beige"><span class="slide-number-badge">05 / 25</span><div class="section-label">Why Your Teen is Pulling Away</div><div class="slide-headline">Growth requires<br>a little wilderness.</div><div class="divider-sm"></div><div class="slide-body">You cannot protect them into confidence. Struggle, boredom, and social friction are the curriculum they need — not obstacles you remove.</div></div>
+<!-- S6 -->
+<div class="slide theme-cream"><span class="slide-number-badge">06 / 25</span><div class="section-label">Why Your Teen is Pulling Away</div><div class="dot-accent"></div><div class="slide-body">Every time you step in before they ask, you send a silent message:<br><br><em>"I don't think you're capable."</em><br><br>They hear it. Even if you never say it.</div><div class="slide-emphasis">WAIT TO BE INVITED.</div></div>
+<!-- S7 -->
+<div class="slide theme-green"><span class="slide-number-badge">07 / 25</span><div class="section-label">Section One · Close</div><div class="slide-headline">The goal was never<br>to stay close.</div><div class="divider"></div><div class="slide-subhead">It was to raise someone who could leave — and choose to come back.</div><div class="slide-emphasis">THAT'S THE REAL SUCCESS.</div></div>
+<!-- S8 -->
+<div class="slide theme-cover"><span class="slide-number-badge">08 / 25</span><div class="section-label">Section Two</div><div class="dot-accent"></div><div class="slide-headline">You're trying to control too much.</div><div class="divider"></div><div class="slide-subhead">And it's costing you the relationship.</div></div>
+<!-- S9 -->
+<div class="slide theme-beige"><span class="slide-number-badge">09 / 25</span><div class="section-label">You're Trying to Control Too Much</div><div class="slide-quote">"Why do they always have an attitude?"</div><div class="divider-sm"></div><div class="slide-body">What looks like defiance is often a bid for autonomy. The attitude isn't about you. It's about them figuring out where they end and you begin.</div><div class="slide-emphasis">RESISTANCE IS HEALTHY DEVELOPMENT.</div></div>
+<!-- S10 -->
+<div class="slide theme-cream"><span class="slide-number-badge">10 / 25</span><div class="section-label">You're Trying to Control Too Much</div><div class="dot-accent"></div><div class="slide-headline">When they feel controlled,<br>they shut down.</div><div class="divider-sm"></div><div class="slide-body">Not to hurt you. To survive. Over-control teaches them to hide — their feelings, their mistakes, their life — from you.</div></div>
+<!-- S11 -->
+<div class="slide theme-beige"><span class="slide-number-badge">11 / 25</span><div class="section-label">You're Trying to Control Too Much</div><div class="slide-body">Correcting every mistake, monitoring every move, questioning every choice — it doesn't feel like love to them.</div><div class="divider-sm"></div><div class="slide-quote">It feels like surveillance.</div><div class="slide-emphasis">CONNECTION FIRST. CORRECTION SECOND.</div></div>
+<!-- S12 -->
+<div class="slide theme-cream"><span class="slide-number-badge">12 / 25</span><div class="section-label">You're Trying to Control Too Much</div><div class="dot-accent"></div><div class="slide-headline">Trust is the bridge.</div><div class="divider-sm"></div><div class="slide-body">Control breaks it. Every time you release a little and they manage — even imperfectly — you are building something they'll carry for life.</div></div>
+<!-- S13 -->
+<div class="slide theme-green"><span class="slide-number-badge">13 / 25</span><div class="section-label">Section Two · Close</div><div class="slide-headline">You're not losing authority<br>by letting go.</div><div class="divider"></div><div class="slide-subhead">You're earning something more powerful: their respect.</div><div class="slide-emphasis">INFLUENCE OUTLASTS CONTROL.</div></div>
+<!-- S14 -->
+<div class="slide theme-cover"><span class="slide-number-badge">14 / 25</span><div class="section-label">Section Three</div><div class="dot-accent"></div><div class="slide-headline">You're helping<br>too much.</div><div class="divider"></div><div class="slide-subhead">And it's quietly making them fragile.</div></div>
+<!-- S15 -->
+<div class="slide theme-beige"><span class="slide-number-badge">15 / 25</span><div class="section-label">You're Helping Too Much</div><div class="slide-quote">"I just want things to be easier for them."</div><div class="divider-sm"></div><div class="slide-body">That's beautiful. And it's also the trap. Ease in adolescence creates fragility in adulthood. The hard things you're absorbing — they need to learn to hold.</div></div>
+<!-- S16 -->
+<div class="slide theme-cream"><span class="slide-number-badge">16 / 25</span><div class="section-label">You're Helping Too Much</div><div class="dot-accent"></div><div class="slide-headline">They can't learn to cook<br>if you always make the meal.</div><div class="divider-sm"></div><div class="slide-body">Laundry. Conflicts. Deadlines. Disappointment. These aren't inconveniences to shield them from. They're the curriculum of real life.</div></div>
+<!-- S17 -->
+<div class="slide theme-beige"><span class="slide-number-badge">17 / 25</span><div class="section-label">You're Helping Too Much</div><div class="slide-body">When you solve their problems before they try, you interrupt the most important process:</div><div class="divider-sm"></div><div class="slide-quote">Learning to trust<br>their own mind.</div><div class="slide-emphasis">PAUSE BEFORE YOU PROBLEM-SOLVE.</div></div>
+<!-- S18 -->
+<div class="slide theme-cream"><span class="slide-number-badge">18 / 25</span><div class="section-label">You're Helping Too Much</div><div class="dot-accent"></div><div class="slide-headline">Struggle is not suffering.</div><div class="divider-sm"></div><div class="slide-body">A struggle survived builds identity. It tells them: "I did hard things. I can do hard things." You can't give that to them — only experience can.</div></div>
+<!-- S19 -->
+<div class="slide theme-green"><span class="slide-number-badge">19 / 25</span><div class="section-label">Section Three · Close</div><div class="slide-headline">Step back.</div><div class="divider"></div><div class="slide-subhead">Not because you don't care — but because you care too much to rob them of the life they need to build.</div><div class="slide-emphasis">YOUR RESTRAINT IS A GIFT.</div></div>
+<!-- S20 -->
+<div class="slide theme-dark-warm"><span class="slide-number-badge">20 / 25</span><div class="section-label">Section Four</div><div class="dot-accent"></div><div class="slide-headline">You're losing yourself.</div><div class="divider"></div><div class="slide-subhead">And they can feel it.</div></div>
+<!-- S21 -->
+<div class="slide theme-cream"><span class="slide-number-badge">21 / 25</span><div class="section-label">You're Losing Yourself</div><div class="slide-quote">"I pour everything into them<br>and feel completely empty."</div><div class="divider-sm"></div><div class="slide-body">Exhaustion isn't a badge. It's a signal. You cannot sustain a relationship from depletion. A drained mother cannot model a full life.</div><div class="slide-emphasis">YOU ARE ALLOWED TO REFILL.</div></div>
+<!-- S22 -->
+<div class="slide theme-beige"><span class="slide-number-badge">22 / 25</span><div class="section-label">You're Losing Yourself</div><div class="dot-accent"></div><div class="slide-headline">Are you parenting from love<br>— or from fear?</div><div class="divider-sm"></div><div class="slide-body">Fear of failure. Fear of losing them. Fear of getting it wrong. Fear makes us grip tighter — and that grip is what they're pulling against.</div></div>
+<!-- S23 -->
+<div class="slide theme-cream"><span class="slide-number-badge">23 / 25</span><div class="section-label">You're Losing Yourself</div><div class="slide-body">When you operate from anxiety, your teen doesn't feel your love.</div><div class="divider-sm"></div><div class="slide-quote">They feel your worry.<br>And worry is heavy to carry<br>for someone else.</div><div class="slide-emphasis">CALM IS CONTAGIOUS.</div></div>
+<!-- S24 -->
+<div class="slide theme-beige"><span class="slide-number-badge">24 / 25</span><div class="section-label">You're Losing Yourself</div><div class="dot-accent"></div><div class="slide-headline">You need a life outside<br>of parenting.</div><div class="divider-sm"></div><div class="slide-body">Not as an escape — as a model. When your teen watches you pursue things that matter to you, they learn: adult life can be full. Meaningful. Yours.</div></div>
+<!-- S25 -->
+<div class="slide theme-dark-warm"><span class="slide-number-badge">25 / 25</span><div class="section-label">Section Four · Final</div><div class="slide-headline">You were someone before<br>you were their mother.</div><div class="divider"></div><div class="slide-subhead">You still are.</div><div class="slide-body">Come back to her. She's the one your teen actually needs to know.</div><div class="slide-emphasis">SHE IS STILL WORTH FINDING.</div><div style="position:absolute;bottom:0;left:0;right:0;padding:16px 24px 20px;text-align:center;border-top:1px solid rgba(212,184,106,0.2)"><div style="font-family:'Lato',sans-serif;font-size:9px;font-weight:300;letter-spacing:2px;text-transform:uppercase;color:rgba(212,184,106,0.6);margin-bottom:5px">Follow me for more content like this on YouTube</div><div style="font-family:'Lato',sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;color:#D4B86A">@RelentlesslyPursued</div></div></div>
+
+<div class="progress-bar"><div class="progress-fill" id="pf" style="width:4%"></div></div>
+<div class="controls">
+  <button class="btn-nav" id="prev" onclick="navigate(-1)" disabled>&#8592;</button>
+  <span class="slide-counter" id="ctr">1 / 25</span>
+  <button class="btn-nav" id="next" onclick="navigate(1)">&#8594;</button>
+</div>
+<div class="keyboard-hint">← → arrow keys to navigate</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let cur = 0;
+  function update() {
+    slides.forEach((s, i) => s.classList.toggle('active', i === cur));
+    document.getElementById('ctr').textContent = `${cur + 1} / 25`;
+    document.getElementById('pf').style.width = `${((cur + 1) / 25) * 100}%`;
+    document.getElementById('prev').disabled = cur === 0;
+    document.getElementById('next').disabled = cur === 24;
+    const tabs = document.querySelectorAll('.tab-btn');
+    const si = cur < 7 ? 0 : cur < 13 ? 1 : cur < 19 ? 2 : 3;
+    tabs.forEach((t, i) => t.classList.toggle('active', i === si));
+  }
+  function navigate(d) { cur = Math.max(0, Math.min(24, cur + d)); update(); }
+  function goToSlide(n) { cur = n; update(); }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') navigate(1);
+    if (e.key === 'ArrowLeft') navigate(-1);
+  });
+</script>
+</body>
+</html>
